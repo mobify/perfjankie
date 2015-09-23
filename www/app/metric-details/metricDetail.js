@@ -48,8 +48,7 @@ angular
 			var pos = $('.graph').position();
 
 			// Sets height of graph with a minimum of 500px
-			var potentialHeight = window.innerHeight - pos.top - 100;
-			this.height = potentialHeight >= 500 ? potentialHeight : '500';
+			this.height = Math.min(window.innerHeight - pos.top - 100, 500);
 
 			$scope.$watchCollection('modifier', function(val, old, scope) {
 				if ($routeParams.stat !== val.stat) {
