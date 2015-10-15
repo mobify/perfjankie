@@ -1,5 +1,5 @@
 angular
-	.module('summary', ['ngRoute', 'paintCycleGraph', 'networkTiming', 'Backend'])
+	.module('summary', ['ngRoute', 'paintCycleGraph', 'networkTiming', 'Backend', 'summaryTiles'])
 	.config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.when('/summary', {
@@ -11,6 +11,7 @@ angular
 						function(data, $route) {
 							var res = {};
 							var params = $route.current.params;
+
 							return data.runList({
 								browser: params.browser,
 								pagename: params.pagename
@@ -27,7 +28,6 @@ angular
 			this.runList = runList;
 			var self = this;
 
-			this.tiles = [];
 			this.currentRunData = {};
 			var metric = 'framesPerSec_raf';
 
@@ -37,6 +37,7 @@ angular
 				time: this.time
 			}).then(function(data) {
 				self.currentRunData = data;
+
 				Data.metricsData({
 					browser: $routeParams.browser,
 					pagename: $routeParams.pagename,
